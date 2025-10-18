@@ -36,9 +36,19 @@ export default function TeacherSpace() {
     try {
       setLoading(true);
       
-      // Get teacher courses
-      const courses = await api.getTeacherCourses(user.id);
-      setUploadedCourses(courses);
+      // Get teacher profile first
+      const profileData = await api.getProfile();
+      console.log('Profile data:', profileData);
+      
+      // Get teacher courses (only if we have a valid teacher ID)
+      if (profileData.profile && profileData.profile._id) {
+        const courses = await api.getTeacherCourses(profileData.profile._id);
+        setUploadedCourses(courses);
+      } else {
+        console.log('No teacher profile found, using user ID');
+        const courses = await api.getTeacherCourses(user.id);
+        setUploadedCourses(courses);
+      }
 
       // Get live requests
       const requests = await api.getLiveRequestsForTeacher();
@@ -46,6 +56,9 @@ export default function TeacherSpace() {
 
     } catch (error) {
       console.error('Error loading teacher data:', error);
+      // Set empty arrays on error
+      setUploadedCourses([]);
+      setLiveRequests([]);
     } finally {
       setLoading(false);
     }
@@ -65,13 +78,23 @@ export default function TeacherSpace() {
     setSubmitting(true);
 
     try {
+      // Get teacher profile to get the correct teacher ID
+      const profileData = await api.getProfile();
+      const teacherId = profileData.profile ? profileData.profile._id : user.id;
+
       const courseData = {
         title: courseForm.title,
         description: courseForm.description || courseForm.title,
         level: courseForm.level,
         type: courseForm.type,
-        teacher: user.id,
+        teacher: teacherId,
       };
+
+      console.log('Frontend - Course form data:', courseForm);
+      console.log('Frontend - User data:', user);
+      console.log('Frontend - Profile data:', profileData);
+      console.log('Frontend - Teacher ID being used:', teacherId);
+      console.log('Frontend - Course data being sent:', courseData);
 
       if (courseForm.type === "video") {
         courseData.videoLink = courseForm.videoLink;

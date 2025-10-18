@@ -11,8 +11,8 @@ function Herosection() {
           {/* Texte et titre */}
           <div className="space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              Plateforme d'Éducation
-              <span className="text-blue-600 block">Moderne</span>
+              EduPlatform
+              <span className="text-blue-600 block">Votre Éducation Moderne</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
               Découvrez une nouvelle façon d'apprendre avec notre plateforme éducative innovante. 

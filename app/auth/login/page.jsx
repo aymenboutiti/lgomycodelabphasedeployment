@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../../contexts/AuthContext';
+import Header from '../../components/header/page';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -46,7 +47,11 @@ export default function LoginPage() {
   return (
     <section className="py-16 px-4 bg-gray-50 min-h-screen">
       <div className="max-w-md mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">Se connecter</h1>
+        <Header 
+          title="Se connecter" 
+          subtitle="Accédez à votre espace personnel"
+          showBackButton={true}
+        />
 
         <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Vous êtes</h2>

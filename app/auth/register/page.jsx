@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import Header from '../../components/header/page';
 
 const baseLevels = [
   { value: 'base', label: "Enseignement de base" },
@@ -97,7 +98,11 @@ export default function RegisterPage() {
   return (
     <section className="py-16 px-4 bg-gray-50 min-h-screen">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">Créer un compte</h1>
+        <Header 
+          title="Créer un compte" 
+          subtitle="Rejoignez notre communauté éducative"
+          showBackButton={true}
+        />
 
         
 
